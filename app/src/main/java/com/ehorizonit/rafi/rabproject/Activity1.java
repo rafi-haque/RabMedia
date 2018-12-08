@@ -37,8 +37,9 @@ public class Activity1 extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("http://www.google.com");
+        myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/viewnews.php");
 
+        /*
         final MarqueeView marqueeView = findViewById(R.id.marqueeTextView);
 
 //        JSONObject jsonObj = new JSONObject();
@@ -51,6 +52,15 @@ public class Activity1 extends AppCompatActivity {
 
         dataChannels[0] = null;
         dataChannels[1] = null;
+        data.add("বগুড়া শিবগঞ্জে পুলিশের সাথে গোলাগুলিতে জেএমবির আমির নিহত");
+        data.add("রাজধানীর বাবুবাজারে অভিযান চালিয়ে ২ কোটি টাকার ভেজাল ওষুধ আটক");
+        data.add("ছাত্রদের মারপিটে উস্কানি দিয়েছেন ডঃ জাফরুল্লাহ");
+        data.add("কক্সবাজার উপকূলে ডাকাতদলে জড়িত থাকার কথা স্বীকার করেছেন র\u200D্যাব কর্মকর্তা");
+
+        dataChannels[2]="1 channels: সময়";
+        dataChannels[3]="3 channels: ইনডি সময় ইটিভি";
+        dataChannels[4]="2 channels: ইটিভি যমুন";
+        dataChannels[5]="4 channels: সময় ইনডি ইটিভি যমুন";
 
 
         marqueeView.startWithList(data);
@@ -77,18 +87,11 @@ public class Activity1 extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 3000L);
 
+        */
 
 
 
-
-        marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, TextView textView) {
-                Toast.makeText(getApplicationContext(), textView.getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+        /*
         //NOW REQUESTING
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -128,23 +131,7 @@ public class Activity1 extends AppCompatActivity {
 
 // Add the request to the RequestQueue.
         queue.add(jsonArrayRequest);
-
+        */
     }
 
-    public void onClick(View v) {
-        TextView tv= findViewById(R.id.textView);
-        MarqueeView marqueeView = findViewById(R.id.marqueeTextView);
-
-        int index = marqueeView.getPosition();
-        Log.d("Error", "onClickError: " + dataChannels[index]);
-        if(dataChannels[index] == null){
-            tv.setText(" ");
-        }
-        else{
-            tv.setText(dataChannels[index]);
-            Log.d("Error", "onClickError: " + tv.getText());;
-        }
-
-
-    }
 }

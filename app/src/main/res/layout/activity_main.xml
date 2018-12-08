@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backColor"
     tools:context=".MainActivity">
 
 
@@ -15,6 +16,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/mybutton"
+        android:elevation="0dp"
         android:text="NewsPaper"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +32,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/mybutton"
         android:text="Online"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,9 +47,46 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/mybutton"
         android:text="TV"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <com.sunfusheng.marqueeview.MarqueeView
+        android:id="@+id/marqueeTextView10"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:mvAnimDuration="3000"
+        app:mvInterval="4000"
+        app:mvSingleLine="false"
+        app:mvTextColor="@android:color/white"
+        app:mvTextSize="20sp"
+        app:mvGravity="center"
+        app:mvDirection="right_to_left"
+
+        />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text=""
+        android:gravity="center"
+        android:textStyle="bold"
+        android:clickable="false"
+        app:layout_constraintBottom_toTopOf="@+id/marqueeTextView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button3" />
 </android.support.constraint.ConstraintLayout>
