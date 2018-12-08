@@ -37,7 +37,7 @@ public class Activity3 extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView3);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("http://www.google.com");
+        myWebView.loadUrl("http://203.112.204.222/rab/videoclipclient/videoclipshow2.html");
 
         /*
         final MarqueeView marqueeView = findViewById(R.id.marqueeTextView3);
