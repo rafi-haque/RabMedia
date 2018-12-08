@@ -37,7 +37,7 @@ public class Activity2 extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView2);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/viewonlinenews.php");
+        myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/onlinep1.php");
 
         /*
         final MarqueeView marqueeView = findViewById(R.id.marqueeTextView2);
