@@ -1,10 +1,14 @@
 package com.ehorizonit.rafi.rabproject;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -29,17 +33,54 @@ import java.util.List;
 public class Activity1 extends AppCompatActivity {
 
     private final String[] dataChannels = new String[10];
+    private ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_1);
+
 
 
         WebView myWebView = findViewById(R.id.webView);
         myWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        myWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        progressBar = ProgressDialog.show(Activity1.this, "LOADING", "Please Wait...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+        myWebView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            public void onPageFinished(WebView view, String url) {
+                if (progressBar.isShowing()) {
+                    progressBar.dismiss();
+                }
+            }
+
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Toast.makeText(Activity1.this, "Oh no! " + description, Toast.LENGTH_SHORT).show();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage(description);
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
+                alertDialog.show();
+            }
+        });
+
+
         myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/newsp1.php?pdf=false");
 
         /*
@@ -136,5 +177,6 @@ public class Activity1 extends AppCompatActivity {
         queue.add(jsonArrayRequest);
         */
     }
+
 
 }
