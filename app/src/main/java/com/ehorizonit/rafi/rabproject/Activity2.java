@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -37,6 +38,8 @@ public class Activity2 extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView2);
         myWebView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
         myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/onlinep1.php");
 
         /*

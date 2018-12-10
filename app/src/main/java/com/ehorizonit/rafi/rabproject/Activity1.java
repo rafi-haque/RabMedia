@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -37,7 +38,9 @@ public class Activity1 extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/newsp1.php");
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("http://203.112.204.222/rab/rabdemo/newsp1.php?pdf=false");
 
         /*
         final MarqueeView marqueeView = findViewById(R.id.marqueeTextView);
