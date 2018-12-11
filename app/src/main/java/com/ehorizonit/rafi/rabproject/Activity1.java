@@ -3,10 +3,14 @@ package com.ehorizonit.rafi.rabproject;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -33,7 +37,7 @@ import java.util.List;
 public class Activity1 extends AppCompatActivity {
 
     private final String[] dataChannels = new String[10];
-    private ProgressDialog progressBar;
+    private MyProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,25 +56,26 @@ public class Activity1 extends AppCompatActivity {
 
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-        progressBar = ProgressDialog.show(Activity1.this, "LOADING", "Please Wait...");
-        progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressBar = MyProgressDialog.show(Activity1.this);
+        //progressBar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         myWebView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+                //view.loadUrl(url);
+                //return true
+                return false;
             }
 
-            public void onPageFinished(WebView view, String url) {
+            public void onPageCommitVisible(WebView view, String url) {
+                super.onPageCommitVisible(view, url);
                 if (progressBar.isShowing()) {
                     progressBar.dismiss();
                 }
             }
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Toast.makeText(Activity1.this, "Oh no! " + description, Toast.LENGTH_SHORT).show();
                 alertDialog.setTitle("Error");
-                alertDialog.setMessage(description);
+                alertDialog.setMessage("Oh No!!! Something Went Wrong!!!");
                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         return;

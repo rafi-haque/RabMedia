@@ -32,7 +32,7 @@ import java.util.List;
 public class Activity3 extends AppCompatActivity {
 
     private final String[] dataChannels = new String[10];
-    private ProgressDialog progressBar;
+    private MyProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,22 @@ public class Activity3 extends AppCompatActivity {
 
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-        progressBar = ProgressDialog.show(Activity3.this, "LOADING", "Please Wait...", true, true);
+        progressBar = MyProgressDialog.show(Activity3.this);
 
         myWebView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+                //view.loadUrl(url);
+                //return true;
+                return false;
             }
+
+            public void onPageCommitVisible(WebView view, String url) {
+                super.onPageCommitVisible(view, url);
+                if (progressBar.isShowing()) {
+                    progressBar.dismiss();
+                }
+            }
+
 
             public void onPageFinished(WebView view, String url) {
                 if (progressBar.isShowing()) {
