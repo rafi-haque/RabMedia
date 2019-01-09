@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 public class MyProgressDialog extends Dialog {
 
     public static MyProgressDialog show(Context context) {
-        return show(context, null, null, false);
+        return show(context, null, null, false, true);
     }
 
     public static MyProgressDialog show(Context context, CharSequence title,
