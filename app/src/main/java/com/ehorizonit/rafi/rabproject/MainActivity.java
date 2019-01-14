@@ -1,5 +1,7 @@
 package com.ehorizonit.rafi.rabproject;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -7,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -32,13 +35,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String[] dataChannels = new String[10];
-    private final String[] numberOfChannels = new String[10];
+    private final String[] dataChannels = new String[70];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -55,21 +57,6 @@ public class MainActivity extends AppCompatActivity {
         final List<String> dummy_data = new ArrayList<>();
         dummy_data.add("Loading News");
         dataChannels[0] = null;
-
-
-//        data.add("NEWS");
-//        data.add(" ");
-//        dataChannels[0] = null;
-//        dataChannels[1] = null;
-//        data.add("বগুড়া শিবগঞ্জে পুলিশের সাথে গোলাগুলিতে জেএমবির আমির নিহত");
-//        data.add("রাজধানীর বাবুবাজারে অভিযান চালিয়ে ২ কোটি টাকার ভেজাল ওষুধ আটক");
-//        data.add("ছাত্রদের মারপিটে উস্কানি দিয়েছেন ডঃ জাফরুল্লাহ");
-//        data.add("কক্সবাজার উপকূলে ডাকাতদলে জড়িত থাকার কথা স্বীকার করেছেন র\u200D্যাব কর্মকর্তা");
-//
-//        dataChannels[0] = "1 channels: সময়";
-//        dataChannels[1] = "3 channels: ইনডি সময় ইটিভি";
-//        dataChannels[2] = "2 channels: ইটিভি যমুন";
-//        dataChannels[3] = "4 channels: সময় ইনডি ইটিভি যমুন";
 
 
         //NOW REQUESTING
@@ -143,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(this, 8 * 1000L);  // 8 second delay
             }
         };
-        handler.postDelayed(runnable, 3 * 1000L);
+        handler.postDelayed(runnable, 4 * 1000L);
 
 
         final Handler handlerForTextUpdate = new Handler();
@@ -156,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
                     marqueeView.startWithList(data, R.anim.anim_right_in, R.anim.anim_left_out);
                 }
 
-                handlerForTextUpdate.postDelayed(this, 300 * 1000L);  // 20 second delay
+                handlerForTextUpdate.postDelayed(this, 120 * 1000L);  // 300 second delay
             }
         };
-        handlerForTextUpdate.postDelayed(runnableForTextUpdate, 7 * 1000L);
+        handlerForTextUpdate.postDelayed(runnableForTextUpdate, 8 * 1000L);
 
 
 
@@ -223,6 +210,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void destroyActivityOnPause() {
+        finish();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void destroyActivityOnStop() {
+        finish();
     }
 
 
