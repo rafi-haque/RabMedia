@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String[] dataChannels = new String[70];
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
+    private static boolean authorization = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -309,15 +310,56 @@ public class MainActivity extends AppCompatActivity {
     public void doPermissionGrantedStuffs() {
         //Have an  object of TelephonyManager
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
 
+        //Get IMEI Number of Phone
         String IMEINumber = tm.getDeviceId();
         //String IMEINumber=tm.getImei();
 
         //Showing IMEI NUMBER in TOAST
-        Toast toast = Toast.makeText(getApplicationContext(), IMEINumber, Toast.LENGTH_SHORT);
-        toast.setMargin(50, 50);
-        toast.show();
+        //Toast toast = Toast.makeText(getApplicationContext(), IMEINumber, Toast.LENGTH_SHORT);
+        //toast.setMargin(50, 50);
+        //toast.show();
+
+        //Make authorization Request
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://203.112.204.222/rab/rabdemo/auth_android.php?imei=" + IMEINumber;
+        // Request a string response from the provided URL.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            //JSONObject authorization_data = response.getJSONObject();
+                            //authorization = response.get("auth");
+                            //Test To see the response
+                            //Toast newToast = Toast.makeText(getApplicationContext(), response.getString("auth"), Toast.LENGTH_LONG);
+                            //newToast.show();
+                            if (Integer.parseInt(response.getString("auth")) == 0) {
+                                Toast newToast = Toast.makeText(getApplicationContext(), "Something Went wrong", Toast.LENGTH_LONG);
+                                newToast.show();
+                                finishAndRemoveTask();
+                            }
+
+
+                        } catch (JSONException ex) {
+                            Log.d("Error", "onResponse: " + ex);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+        // Add the request to the RequestQueue.
+        queue.add(jsonObjectRequest);
+
 
 
     }
