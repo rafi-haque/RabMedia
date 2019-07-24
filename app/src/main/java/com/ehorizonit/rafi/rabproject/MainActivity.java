@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                doPermissionGrantedStuffs();
                 // Perform action on click
                 Intent activityChangeIntent = new Intent(MainActivity.this, Activity1.class);
 
@@ -200,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                doPermissionGrantedStuffs();
                 // Perform action on click
                 Intent activityChangeIntent = new Intent(MainActivity.this, Activity2.class);
 
@@ -211,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                doPermissionGrantedStuffs();
                 // Perform action on click
                 Intent activityChangeIntent = new Intent(MainActivity.this, Activity3.class);
 
@@ -288,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
                 doPermissionGrantedStuffs();
             } else {
                 alertAlert("Not Allowed");
+                finishAndRemoveTask();
             }
         }
     }
